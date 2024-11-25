@@ -11,7 +11,7 @@
 
             $result = $db->query("SELECT * FROM users WHERE email = '$email'");
 
-            if ( mysqli_num_rows($result) == 0 ) {
+            if ( $result->num_rows == 0 ) {
                 die("user not found with this email");
             }
 
@@ -32,12 +32,20 @@
 
             $result = $db->query("SELECT * FROM users WHERE email = '$email'");
 
-            if ( mysqli_num_rows($result) > 0 ) {
+            if ( $result->num_rows > 0 ) {
                 die("user with that email already exists");
             }
 
             $db->query("INSERT INTO users (email, password) VALUES ('$email', '$password')");
             die("user registered");
         }
+
+        public function logout() {
+
+            session_unset();
+            session_destroy();
+
+        }
+
 
     }
