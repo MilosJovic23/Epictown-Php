@@ -4,7 +4,7 @@
 
     class Database {
 
-        public $mysql;
+        public mysqli $mysql;
 
         public function __construct() {
 
