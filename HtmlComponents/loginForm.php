@@ -16,6 +16,10 @@
                 <input type="password" placeholder="password" name="password">
                 <button type="submit">login</button>
             </form>
+            <div>
+                <p>Dont have account?</p>
+                <a href="registerForm.php">Register</a>
+            </div>
         </div>
     </body>
 </html>
