@@ -15,7 +15,7 @@
                 die("user not found with this email");
             }
 
-            $user = mysqli_fetch_assoc($result);
+            $user = $result->fetch_assoc();
             $loggedIn = false;
 
             if ( password_verify( $password, $user['password'] ) ) {
@@ -37,7 +37,7 @@
             }
 
             $db->query("INSERT INTO users (email, password) VALUES ('$email', '$password')");
-            die("user registered");
+            return true;
         }
 
         public function logout() {
