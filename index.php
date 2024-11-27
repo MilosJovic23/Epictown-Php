@@ -1,6 +1,7 @@
 <?php
 
 
+    require_once "./classes/User.php";
 
     if( session_status() == PHP_SESSION_NONE ){
         session_start();
@@ -15,11 +16,15 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Document</title>
+        <title>Epictown</title>
     </head>
     <body>
         <?php include "HtmlComponents/navbar.php"; ?>
-        <h1>homepage</h1>
+        <?php include "HtmlComponents/comicList.php"; ?>
+
+
+
+
     </body>
 </html>     
 
