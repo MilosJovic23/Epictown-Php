@@ -22,9 +22,6 @@
         <?php include "HtmlComponents/navbar.php"; ?>
         <?php include "HtmlComponents/comicList.php"; ?>
 
-
-
-
     </body>
 </html>     
 
