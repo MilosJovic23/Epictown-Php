@@ -9,6 +9,7 @@
     $newConnection = new User();
 
     $query = 'SELECT * FROM `comicbooks`';
+
     $result = $newConnection->mysql->query($query);
     $row = $result->fetch_all(MYSQLI_ASSOC);
 
