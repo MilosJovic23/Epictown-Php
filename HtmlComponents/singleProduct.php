@@ -48,6 +48,7 @@
                     </a>
                     <h4> <?=  $comic['title'] ?></h4>
                     <i> author: <?=  $comic['author'] ?></i>
+                    <p> <?=  $comic['description'] ?> </p>
                     <p> rating: <?=  $comic['rating'] ?></p>
                 </div>
 
