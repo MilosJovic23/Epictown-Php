@@ -42,8 +42,15 @@
 
         public function logout() {
 
-            session_unset();
-            session_destroy();
+            if( session_status() == PHP_SESSION_ACTIVE ) {
+
+                session_unset();
+                session_destroy();
+                return true;
+
+            }
+
+            return false;
 
         }
 
