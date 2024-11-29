@@ -4,11 +4,11 @@
 
     class Database {
 
-        public mysqli $mysql;
+        public mysqli $connection;
 
         public function __construct() {
 
-            $this->mysql = new mysqli("localhost", "root", "", "epictown");
+            $this->connection = new mysqli("localhost", "root", "", "epictown");
 
         }
     }
