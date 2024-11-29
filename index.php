@@ -1,14 +1,11 @@
 <?php
 
-
     require_once "./classes/User.php";
 
     if( session_status() == PHP_SESSION_NONE ){
         session_start();
     }
 
-
-    
     ?>
 
 <!doctype html>
@@ -20,8 +17,8 @@
     </head>
     <body>
         <?php include "HtmlComponents/navbar.php"; ?>
+        <?php include "HtmlComponents/search.php"; ?>
         <?php include "HtmlComponents/comicList.php"; ?>
-
     </body>
 </html>     
 
