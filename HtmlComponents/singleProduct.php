@@ -1,12 +1,10 @@
 
-
-
 <?php
+
 
     if( session_status() == PHP_SESSION_NONE ){
         session_start();
     }
-
 
     require_once  "../classes/User.php";
 
@@ -14,46 +12,40 @@
         die("page with this id doesnt exist");
     }
 
-    $newConnection = new User();
-    $conn = $newConnection->mysql;
+    $db = new Database();
+    $conn = $db->connection;
     $id = $conn->real_escape_string($_GET['id']);
 
     $query = 'SELECT * FROM comicbooks WHERE id = "' . $id . '"';
 
     $result = $conn->query($query);
+    $comicbook = $result->fetch_assoc();
 
-    $comic = $result->fetch_assoc();
 
-
-    ?>
+?>
 
 
 <!doctype html>
 <html lang="en">
-
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>singleProduct</title>
     </head>
-
     <body>
 
         <?php include "navbar.php"; ?>
         <main>
-
                 <div>
                     <a>
-                        <img src="<?= $comic['imgURL'] ?>" alt="<?= $comic['title'] ?>"/>
+                        <img src="<?= $comicbook['imgURL'] ?>" alt="<?= $comicbook['title'] ?>"/>
                     </a>
-                    <h4> <?=  $comic['title'] ?></h4>
-                    <i> author: <?=  $comic['author'] ?></i>
-                    <p> <?=  $comic['description'] ?> </p>
-                    <p> rating: <?=  $comic['rating'] ?></p>
+                    <h4> <?=  $comicbook['title'] ?></h4>
+                    <i> author: <?=  $comicbook['author'] ?></i>
+                    <p> <?=  $comicbook['description'] ?> </p>
+                    <p> rating: <?=  $comicbook['rating'] ?></p>
                 </div>
-
         </main>
 
     </body>
-
 </html>

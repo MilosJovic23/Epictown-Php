@@ -3,13 +3,11 @@
     require_once "Database.php";
     class User extends Database {
 
-
         public function login($email, $password) {
 
-            $db = $this->mysql;
-            $email = mysqli_real_escape_string( $this->mysql,$email );
+            $email = mysqli_real_escape_string( $this->connection,$email );
 
-            $result = $db->query("SELECT * FROM users WHERE email = '$email'");
+            $result = $this->connection->query("SELECT * FROM users WHERE email = '$email'");
 
             if ( $result->num_rows == 0 ) {
                 die("user not found with this email");
@@ -26,21 +24,21 @@
 
         public function register($email, $password) {
 
-            $db = $this->mysql;
-            $email = mysqli_real_escape_string( $this->mysql,$email);
+            $email = mysqli_real_escape_string( $this->connection,$email);
             $password = password_hash($password, PASSWORD_BCRYPT);
 
-            $result = $db->query("SELECT * FROM users WHERE email = '$email'");
+            $result = $this->connection->query("SELECT * FROM users WHERE email = '$email'");
 
             if ( $result->num_rows > 0 ) {
                 die("user with that email already exists");
             }
 
-            $db->query("INSERT INTO users (email, password) VALUES ('$email', '$password')");
+            $this->connection->query("INSERT INTO users (email, password) VALUES ('$email', '$password')");
             return true;
+
         }
 
-        public function logout() {
+        public function logout(): bool {
 
             if( session_status() == PHP_SESSION_ACTIVE ) {
 
@@ -49,10 +47,8 @@
                 return true;
 
             }
-
             return false;
 
         }
-
 
     }
