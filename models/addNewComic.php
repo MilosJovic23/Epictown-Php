@@ -38,6 +38,8 @@
 
     if ($addNewComic) {
         header("location: ../HtmlComponents/dashboard.php");
+    } else {
+        die("An error occurred during adding the new comic");
     }
 
 
