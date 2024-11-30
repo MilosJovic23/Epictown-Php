@@ -19,5 +19,16 @@
             return true;
         }
 
+        public function delete($id) {
+
+            $comicId = $this->connection->real_escape_string( $id );
+
+            $result = $this->connection->query("DELETE FROM comicbooks WHERE id = '$comicId' ");
+
+            if ($result) {
+                return true;
+            }
+            die("comic with that id doesnt exist");
+        }
 
     }
