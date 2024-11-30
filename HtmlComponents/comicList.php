@@ -18,7 +18,7 @@
 
     <?php foreach ( $allComics as $comic ): ?>
         <div style="width: 150px;">
-            <a href="HtmlComponents/singleProduct.php?id=<?= $comic['id'] ?>">
+            <a href="/Epictown/HtmlComponents/singleProduct.php?id=<?= $comic['id'] ?>">
                 <img src="<?= $comic['imgURL'] ?>" style="width: 150px;">
             </a>
             <h4> <?=  $comic['title'] ?></h4>
