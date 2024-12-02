@@ -48,7 +48,18 @@
                 <h4> <?=  $comic['title'] ?></h4>
                 <i> author: <?=  $comic['author'] ?></i>
                 <p> rating: <?=  $comic['rating'] ?></p>
-                <form method="GET" action="../models/deleteComic.php">
+                <form method="GET" action="../models/updateComic.php">
+                    <input name="id" value="<?= $comic['id'] ?>" type="hidden">
+
+                    <input value="<?=  $comic['title'] ?>"  name="title" >
+                    <input value="<?=  $comic['description'] ?>"  name="description" >
+                    <input value="<?=  $comic['format'] ?>"  name="format" >
+                    <input value="<?=  $comic['imgURL'] ?>"  name="imgURL" >
+                    <input value="<?=  $comic['author'] ?>"  name="author" >
+                    <input value="<?=  $comic['rating'] ?>"  name="rating" >
+                    <button type="submit">update</button>
+                </form>
+                <form method="GET" action="../models/deleteComic.php" style="margin-top:20px;margin-bottom:20px">
                     <input name="id" value="<?= $comic['id'] ?>" type="hidden">
                     <button type="submit">delete</button>
                 </form>
