@@ -37,7 +37,7 @@
     if ( $updateComicbook ){
         header("location:../HtmlComponents/dashboard.php");
     }
-    die("there was an error updating database  ");
+    die("there was an error updating database");
 
 
 
