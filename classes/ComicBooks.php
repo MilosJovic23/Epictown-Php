@@ -22,13 +22,12 @@
         public function delete($id) {
 
             $comicId = $this->connection->real_escape_string( $id );
-
             $result = $this->connection->query("DELETE FROM comicbooks WHERE id = '$comicId' ");
 
             if ($result) {
                 return true;
             }
-            die("comic with that id doesnt exist");
+            die("comic with that id doesn't exist");
         }
         public function update($id,$description,$title,$format,$imgURL,$author,$rating): bool {
 
