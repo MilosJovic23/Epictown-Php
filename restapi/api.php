@@ -6,15 +6,15 @@
     header("Content-type: application/json");
     include ("../classes/Database.php");
 
-    $conn = new Database();
-    $db = $conn->connection;
+    $db = new Database();
+    $conn = $db->connection;
 
     $method = $_SERVER["REQUEST_METHOD"];
     $input = json_decode(file_get_contents("php://input"),true);
 
     switch ( $method ) {
         case "POST":
-            handlePost($db,$input);
+            handlePost($conn,$input);
             break;
         case "GET":
                 $ffd = 1;
@@ -34,7 +34,7 @@
     }
 
 
-    function handlePost($db,$input):void {
-        var_dump($db);
+    function handlePost($conn,$input):void {
+        var_dump($conn);
         echo json_encode(["message"=>"user created"]);
     }
