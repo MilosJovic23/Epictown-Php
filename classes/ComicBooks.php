@@ -14,7 +14,7 @@
             return $result->fetch_all(MYSQLI_ASSOC);;
 
         }
-        public function add($input) :string {
+        public function add($input) :void {
 
             $description = $this->connection->real_escape_string( $input["description"] );
             $title = $this->connection->real_escape_string( $input["title"] );
@@ -26,7 +26,7 @@
             $this->connection->query("INSERT INTO comicbooks 
                                             (description,title,format,imgURL,author,rating) 
                                             VALUES ('$description','$title','$format','$imgURL','$author',$rating) ");
-            return $this->connection->lastInsertId();
+
 
         }
 
@@ -40,15 +40,15 @@
             }
             die("comic with that id doesn't exist");
         }
-        public function update($id,$description,$title,$format,$imgURL,$author,$rating) :bool {
+        public function update($input) :bool {
 
-            $comicId = $this->connection->real_escape_string( $id );
-            $description = $this->connection->real_escape_string( $description );
-            $title = $this->connection->real_escape_string( $title );
-            $format = $this->connection->real_escape_string( $format );
-            $imgURL = $this->connection->real_escape_string( $imgURL );
-            $author = $this->connection->real_escape_string( $author );
-            $rating = $this->connection->real_escape_string( $rating );
+            $comicId = $this->connection->real_escape_string( $input["id"] );
+            $description = $this->connection->real_escape_string( $input["description"] );
+            $title = $this->connection->real_escape_string( $input["description"] );
+            $format = $this->connection->real_escape_string( $input["description"] );
+            $imgURL = $this->connection->real_escape_string( $input["description"] );
+            $author = $this->connection->real_escape_string( $input["description"] );
+            $rating = $this->connection->real_escape_string( $input["description"] );
 
             $this->connection->query(
                 "UPDATE comicbooks 
