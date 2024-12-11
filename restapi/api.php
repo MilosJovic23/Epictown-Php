@@ -20,15 +20,16 @@
             $result = $comicbook->getComics();
             echo json_encode($result);
             break;
-        case "PUT":
-            $dsa = 1;
+        case "PATCH":
+
             break;
         case "DELETE":
-            $vds = 1;
+            $comicbook->delete($input["id"]);
+            echo json_encode(["message"=>"successfully deleted comic book with id ".$input["id"]]);
             break;
         default:
             http_response_code(405);
-            echo json_encode(["error" => "Method not allowed"]);
+            header("Allowed methods: PATCH, DELETE, POST, GET");
             break;
 
     }
