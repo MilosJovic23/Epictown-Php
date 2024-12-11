@@ -6,7 +6,7 @@
 
 
 
-        public function getComics() {
+        public function getComics() :array {
 
             $sql = "SELECT * FROM comicbooks";
             $conn = $this->connection;
@@ -14,8 +14,7 @@
             return $result->fetch_all(MYSQLI_ASSOC);;
 
         }
-        public function add($input) :string
-        {
+        public function add($input) :string {
 
             $description = $this->connection->real_escape_string( $input["description"] );
             $title = $this->connection->real_escape_string( $input["title"] );
@@ -28,9 +27,10 @@
                                             (description,title,format,imgURL,author,rating) 
                                             VALUES ('$description','$title','$format','$imgURL','$author',$rating) ");
             return $this->connection->lastInsertId();
+
         }
 
-        public function delete($id) {
+        public function delete($id) :bool {
 
             $comicId = $this->connection->real_escape_string( $id );
             $result = $this->connection->query("DELETE FROM comicbooks WHERE id = '$comicId' ");
@@ -40,7 +40,7 @@
             }
             die("comic with that id doesn't exist");
         }
-        public function update($id,$description,$title,$format,$imgURL,$author,$rating): bool {
+        public function update($id,$description,$title,$format,$imgURL,$author,$rating) :bool {
 
             $comicId = $this->connection->real_escape_string( $id );
             $description = $this->connection->real_escape_string( $description );
@@ -57,6 +57,7 @@
                     WHERE id = '$comicId' "
             );
             return true;
+
         }
 
     }
