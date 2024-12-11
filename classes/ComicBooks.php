@@ -5,18 +5,29 @@
     class ComicBooks extends Database {
 
 
-        public function add($description,$title,$format,$imgURL,$author,$rating) :bool
+
+        public function getComics() {
+
+            $sql = "SELECT * FROM comicbooks";
+            $conn = $this->connection;
+            $result = $conn->query($sql);
+            return $result->fetch_all(MYSQLI_ASSOC);;
+
+        }
+        public function add($input) :string
         {
 
-            $description = $this->connection->real_escape_string( $description );
-            $title = $this->connection->real_escape_string( $title );
-            $format = $this->connection->real_escape_string( $format );
-            $imgURL = $this->connection->real_escape_string( $imgURL );
-            $author = $this->connection->real_escape_string( $author );
-            $rating = $this->connection->real_escape_string( $rating );
+            $description = $this->connection->real_escape_string( $input["description"] );
+            $title = $this->connection->real_escape_string( $input["title"] );
+            $format = $this->connection->real_escape_string( $input["format"] );
+            $imgURL = $this->connection->real_escape_string( $input["imgURL"] );
+            $author = $this->connection->real_escape_string( $input["author"] );
+            $rating = $this->connection->real_escape_string( $input["rating"] );
 
-            $this->connection->query("INSERT INTO comicbooks (description,title,format,imgURL,author,rating) VALUES ('$description','$title','$format','$imgURL','$author',$rating) ");
-            return true;
+            $this->connection->query("INSERT INTO comicbooks 
+                                            (description,title,format,imgURL,author,rating) 
+                                            VALUES ('$description','$title','$format','$imgURL','$author',$rating) ");
+            return $this->connection->lastInsertId();
         }
 
         public function delete($id) {
