@@ -3,10 +3,9 @@
     require_once "Database.php";
     class User extends Database {
 
-        public function login($email, $password) {
+        public function login($email, $password) :bool {
 
             $email = mysqli_real_escape_string( $this->connection,$email );
-
             $result = $this->connection->query("SELECT * FROM users WHERE email = '$email'");
 
             if ( $result->num_rows == 0 ) {
@@ -22,17 +21,15 @@
             return $loggedIn;
         }
 
-        public function register($email, $password) {
+        public function register($email, $password) :bool {
 
             $email = mysqli_real_escape_string( $this->connection,$email);
             $password = password_hash($password, PASSWORD_BCRYPT);
-
             $result = $this->connection->query("SELECT * FROM users WHERE email = '$email'");
 
             if ( $result->num_rows > 0 ) {
-                die("user with that email already exists");
+                return  false;
             }
-
             $this->connection->query("INSERT INTO users (email, password) VALUES ('$email', '$password')");
             return true;
 
