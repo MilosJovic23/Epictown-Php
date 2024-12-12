@@ -33,12 +33,11 @@
         public function delete($id) :bool {
 
             $comicId = $this->connection->real_escape_string( $id );
-            $result = $this->connection->query("DELETE FROM comicbooks WHERE id = '$comicId' ");
+            $this->connection->query("DELETE FROM comicbooks WHERE id = '$comicId' ");
 
-            if ($result) {
-                return true;
-            }
-            die("comic with that id doesn't exist");
+            return true;
+
+
         }
         public function update($input) :bool {
 
