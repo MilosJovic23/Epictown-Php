@@ -21,11 +21,16 @@
             echo json_encode($result);
             break;
         case "PATCH":
-
+            $result = $comicbook->update($input);
+            if ( $result ) {
+                echo json_encode(["message"=>"successfully updated comic book"]);
+            }
             break;
         case "DELETE":
-            $comicbook->delete($input["id"]);
-            echo json_encode(["message"=>"successfully deleted comic book with id ".$input["id"]]);
+            $result = $comicbook->delete($input["id"]);
+            if ( $result ) {
+                echo json_encode(["message"=>"successfully deleted comic book with id ".$input["id"]]);
+            }
             break;
         default:
             http_response_code(405);
