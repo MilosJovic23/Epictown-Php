@@ -59,4 +59,17 @@
 
         }
 
+        public function search( $input ) :array {
+
+            $searchTerm = $this->connection->real_escape_string($input["search"]);
+            $result = $this->connection->query("SELECT * FROM comicbooks WHERE title LIKE '%$searchTerm%' OR author LIKE '%$searchTerm%' ");
+            $foundComics = [];
+
+            if ($result->num_rows > 0) {
+                $foundComics = $result->fetch_all(MYSQLI_ASSOC);
+            }
+
+            return $foundComics;
+        }
+
     }
