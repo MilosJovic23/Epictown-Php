@@ -19,7 +19,6 @@
             $username = $input["username"] ;
             $password = $input["password"] ;
 
-
             if ( !isset($username) || !isset($password) ) {
                 echo json_encode(["message" => "Username and password are required"]);
                 exit;
