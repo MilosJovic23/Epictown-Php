@@ -10,9 +10,6 @@
     $method = $_SERVER["REQUEST_METHOD"];
     $input = json_decode(file_get_contents('php://input'),true);
 
-
-
-
     switch ( $method ) {
         case "POST":
 
@@ -32,9 +29,11 @@
                 echo json_encode(["message" => "User with that email already exists"]);
             }
             break;
+
         default:
             http_response_code(405);
             header("Allow: POST");
             echo json_encode(["message" => "Method not allowed"]);
             break;
+
     }
