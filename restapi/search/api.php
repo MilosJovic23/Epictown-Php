@@ -7,15 +7,18 @@
 
     require_once "../../classes/ComicBooks.php";
 
-    $searchTerm = $input["search"];
-
-
     switch ($method) {
         case 'POST':
-
+            $searchTerm = $input["search"];
             $comicbook = new ComicBooks();
-            $comicbook->search($searchTerm);
-
-            echo json_encode($comicbook);
+            $result = $comicbook->search($searchTerm);
+            echo is_array($result) ? json_encode($result) : json_encode(["message" => "No results found"]);
+            http_response_code(201);
             break;
+        default:
+            http_response_code(405);
+            header('Allow: POST');
+            echo json_encode(["error" => "Method not allowed"]);
+            break;
+
     }
