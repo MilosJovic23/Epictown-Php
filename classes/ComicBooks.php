@@ -59,26 +59,19 @@
 
         }
 
-        public function search( $searchTerm ) :array {
-
+        public function search( $searchTerm ) : array | stdClass {
 
             $searchTerm = $this->connection->real_escape_string($searchTerm);
             $result = $this->connection->query("SELECT * FROM comicbooks WHERE title LIKE '%$searchTerm%' OR author LIKE '%$searchTerm%' ");
-            $foundComics = [];
 
-            $connection = $this->connection;
-
-            var_dump($result);
-
-            if ($result->num_rows == 0) {
-                return $foundComics;
-            }
-            if (!$connection) {
-                return (object) ['connection' => new stdClass()]; // Ensure an empty object
+            $foundResults = $result->fetch_all(MYSQLI_ASSOC);
+            var_dump($foundResults);
+            if ( $foundResults ) {
+                return $foundResults;
             } else {
-                return (object) ['connection' => $connection]; // Return fetched data
+                return new stdClass();
             }
-            return $result->fetch_all(MYSQLI_ASSOC);
+
         }
 
     }
