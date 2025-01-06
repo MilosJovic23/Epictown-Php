@@ -65,7 +65,6 @@
             $result = $this->connection->query("SELECT * FROM comicbooks WHERE title LIKE '%$searchTerm%' OR author LIKE '%$searchTerm%' ");
 
             $foundResults = $result->fetch_all(MYSQLI_ASSOC);
-            var_dump($foundResults);
             if ( $foundResults ) {
                 return $foundResults;
             } else {
