@@ -1,6 +1,5 @@
 <?php
 
-
     header("Content-type: application/json");
     include ("../../classes/User.php");
 
