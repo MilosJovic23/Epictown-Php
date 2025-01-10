@@ -35,17 +35,5 @@
 
         }
 
-        public function logout(): bool {
-
-            if( session_status() == PHP_SESSION_ACTIVE ) {
-
-                session_unset();
-                session_destroy();
-                return true;
-
-            }
-            return false;
-
-        }
 
     }
