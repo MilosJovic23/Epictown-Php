@@ -14,7 +14,7 @@
             return $result->fetch_all(MYSQLI_ASSOC);;
 
         }
-        public function add($input) :void {
+        public function add($input) :bool {
 
             $description = $this->connection->real_escape_string( $input["description"] );
             $title = $this->connection->real_escape_string( $input["title"] );
@@ -27,7 +27,7 @@
                                             (description,title,format,imgURL,author,rating) 
                                             VALUES ('$description','$title','$format','$imgURL','$author',$rating) ");
 
-
+            return true;
         }
 
         public function delete($id) :bool {
