@@ -20,8 +20,10 @@
     switch ( $method ) {
 
         case "POST":
-            $comicbook->add($input);
-            echo json_encode(["message"=>"successfully added comic book to database"]);
+            $result = $comicbook->add($input);
+            if ($result) {
+                echo json_encode(["message"=>"successfully added comic book to database"]);
+            }
             http_response_code(201);
             break;
         case "GET":
