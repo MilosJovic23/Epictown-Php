@@ -43,11 +43,11 @@
 
             $comicId = $this->connection->real_escape_string( $input["id"] );
             $description = $this->connection->real_escape_string( $input["description"] );
-            $title = $this->connection->real_escape_string( $input["description"] );
-            $format = $this->connection->real_escape_string( $input["description"] );
-            $imgURL = $this->connection->real_escape_string( $input["description"] );
-            $author = $this->connection->real_escape_string( $input["description"] );
-            $rating = $this->connection->real_escape_string( $input["description"] );
+            $title = $this->connection->real_escape_string( $input["title"] );
+            $format = $this->connection->real_escape_string( $input["format"] );
+            $imgURL = $this->connection->real_escape_string( $input["imgURL"] );
+            $author = $this->connection->real_escape_string( $input["author"] );
+            $rating = $this->connection->real_escape_string( $input["rating"] );
 
             $this->connection->query(
                 "UPDATE comicbooks 
