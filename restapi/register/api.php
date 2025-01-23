@@ -1,6 +1,8 @@
 <?php
 
     header("Content-type: application/json");
+    header("Access-Control-Allow-Methods: POST, GET, PATCH, DELETE");
+    header("Access-Control-Allow-Origin: http://localhost:3000");
     include ("../../classes/User.php");
 
     $user = new User();
@@ -19,13 +21,13 @@
                 exit;
             }
             $register = $user->register( $username, $password );
-            if ( $register ) {
-                http_response_code(201);
-                echo json_encode(["message" => "User successfully registered"]);
-            } else {
+            if ( !$register ) {
                 http_response_code(409);
                 echo json_encode(["message" => "User with that email already exists"]);
+                exit;
             }
+            http_response_code(201);
+            echo json_encode(["message" => "User successfully registered"]);
             break;
         default:
             http_response_code(405);
