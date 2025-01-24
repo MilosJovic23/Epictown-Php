@@ -1,10 +1,10 @@
 <?php
 
 
-    header("Content-type: application/json");
-    header("Access-Control-Allow-Origin: POST");
     header("Access-Control-Allow-Origin: http://localhost:3000");
-
+    header("Access-Control-Allow-Methods: POST, OPTIONS");
+    header("Access-Control-Allow-Headers: Content-Type");
+    header("Content-Type: application/json");
     include ("../../classes/User.php");
 
     $user = new User();
@@ -12,16 +12,25 @@
     $method = $_SERVER["REQUEST_METHOD"];
     $input = json_decode(file_get_contents('php://input'),true);
 
-    if ( $method !== "POST" ) {
-        echo json_encode(["message" => "Method not allowed"]);
+    if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+        http_response_code(200);
         exit;
     }
+
+    if ($method !== "POST") {
+        http_response_code(405);
+        echo json_encode(["success" => false, "message" => "Method not allowed"]);
+        exit;
+    }
+
     $result = $user->login($input);
-    if( !$result ){
-        echo json_encode(["message" => "wrong credentials"]);
+    if (!$result) {
         http_response_code(401);
+        echo json_encode(["success" => false, "message" => "Wrong credentials"]);
         exit;
     }
-    http_response_code(202);
-    echo json_encode(["message"=>"success"]);
+
+    http_response_code(200);
+    echo json_encode(["success" => true, "message" => "Login successful"]);
+
 
