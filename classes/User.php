@@ -3,22 +3,25 @@
     require_once "Database.php";
     class User extends Database {
 
-        public function login($input) :bool {
+        public function login($input) :array {
 
             $email = mysqli_real_escape_string( $this->connection,$input["username"] );
             $password = mysqli_real_escape_string( $this->connection,$input["password"] );
             $result = $this->connection->query("SELECT * FROM users WHERE email = '$email'");
 
-            if ( $result->num_rows === 0 ) {
-                die("user not found with this email");
+            if ($result->num_rows === 0) {
+                http_response_code(401);
+                return ["success" => false, "message" => "User not found"];
             }
 
             $user = $result->fetch_assoc();
-            $loggedIn = false;
-            if ( password_verify( $password, $user['password'] ) ) {
-                $loggedIn = true;
+            $loggedIn = password_verify($password, $user['password']);
+
+            if ( !$loggedIn ) {
+                http_response_code(401);
+                return ["success" => false, "message" => "Invalid credentials"];
             }
-            return $loggedIn;
+            return ["success" => true, "message" => "Login successful"];
         }
 
         public function register($email, $password) :bool {
