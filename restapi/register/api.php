@@ -1,7 +1,9 @@
+
 <?php
 
-    header("Content-type: application/json");
-    header("Access-Control-Allow-Methods: POST, GET, PATCH, DELETE");
+    header("Content-Type: application/json");
+    header("Access-Control-Allow-Headers: Content-Type");
+    header("Access-Control-Allow-Methods: POST, OPTIONS");
     header("Access-Control-Allow-Origin: http://localhost:3000");
     include ("../../classes/User.php");
 
@@ -9,6 +11,11 @@
     $conn = $user->connection;
     $method = $_SERVER["REQUEST_METHOD"];
     $input = json_decode(file_get_contents('php://input'),true);
+
+    if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+        http_response_code(200);
+        exit;
+    }
 
     switch ( $method ) {
         case "POST":
