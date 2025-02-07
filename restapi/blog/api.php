@@ -32,4 +32,4 @@
     }
 
     http_response_code(200);
-    echo json_encode(["success" => true, "data" => $result]);
+    echo json_encode($result);
